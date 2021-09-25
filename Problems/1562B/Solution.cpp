@@ -75,11 +75,11 @@ bool isSeq(string first, string second, string n) {
     auto x1 = n.find(second, x+1); 
     return x != string::npos && x1 != string::npos; 
 }
- 
+
 bool hasValue(vector<int> f, char val) {
     return f[val - '1'] > 0;
 }
- 
+
 bool hasValueMoreThanOne(vector<int> f, char val) {
     return f[val - '1'] > 1;
 }
@@ -102,7 +102,7 @@ int main() {
         loop(i, 0, k) {
             f[n[i] - '1']++;
         }
- 
+
         if(hasValue(f, '1')) {
             p_e(1);
             p_e(1);
@@ -208,4 +208,4 @@ int main() {
         }
     }
 return 0;
-}   
+}

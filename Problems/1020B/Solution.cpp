@@ -3,6 +3,12 @@
 #include <math.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
+#include <conio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 using namespace std;
 using namespace __gnu_pbds;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
@@ -10,6 +16,7 @@ using namespace __gnu_pbds;
 template <typename T> 
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
 typedef long long ll;
+typedef long long int lli;
 typedef unsigned long long ull;
 typedef long double lld;
 typedef pair<int,int> pii;
@@ -54,62 +61,65 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 #define read(a) cin >> a
 #define read_2(a,b) cin >> a >> b;
 #define read_array(a, n) loop(n) {cin >> a[i];}
-#define read_vector_l(v, n) loop(n) { ll val; cin >> val; v.pb(val);};
-#define read_vector_i(v, n) loop(n) { int val; cin >> val; v.pb(val);};
+#define read_vector_l(v, n) loop(i, 0, n) { ll val; cin >> val; v.pb(val);};
+#define read_vector_i(v, n) loop(i, 0, n) { int val; cin >> val; v.pb(val);};
 #define read_arrays(a, n, s) loops(n, s) {cin >> a[i];}
 #define p_m(m, r, c) loopi(r) { loopj(c) {p(m[i][j]); p(" ");} p_e("");}
 #define p_a(m, n) loopi(n)  {p(m[i]); p(" ");}
 #define map_insert(m, a, b) m.insert({a,b})
 #define map_erase(m, a) m.erase(a)
+#define stricklyLess(values, key) upper_bound(values.begin(), values.end(), key, greater<int>()); 
 #define loopm(map) for(auto it = map.begin(); it != map.end();it++)
 #define MOD 1000000007
 #define INF 1e18
 #define mp make_pair
 #define pb push_back
-const int MAXIN = 2e6;
-ll n,m,q,t,k, x, y ;
-int i;
-string s1;
-int dp[MAXIN];
-int ans;
-int v[MAXIN];
-int p[MAXIN];
+#define g_p(tc, t, ans) cout << "Case #" << (tc-t) << ": " << ans << endl;
+#define g_p_s(t, ans) cout << "Case #" << t << ": " << ans << endl;
 
+void dfs(int curr, vector<int> *adj, vector<bool> v) {
+    debug(curr);
+    v[curr] = 1;
+    if(adj[curr].size() == 0) {
+        p_e(curr);
+        return;
+    }
+    for(int ne : adj[curr]) {
+        if(v[ne]) {
+            p_s(ne);
+        } else {
+            dfs(ne, adj, v);
+        }
+    }
+}
+
+int i,j,n,ans, t,x,y, maxn;
+string str;
 int main() {
 
-    #ifdef LOCAL_JUDGE
+        #ifdef LOCAL_JUDGE
     freopen("Error.txt", "w", stderr);
-    #endif
+        #endif
     fastio();
     read(n);
-    read(k);
-    read(s1);
-    if(k == 0) {
-        p(s1);
-    }   else {
-        if(n == 1) {
-            p(0);
-        } else {
-            p(1);
-            if(s1[0] != '1') {            
-                k--;
-            } 
-            loop(i, 1, n) {
-                if(s1[i] == '0') {
-                    p(s1[i]);
-                    continue;
-                } else {
-                    if(k == 0) {
-                        p(s1[i]);
-                    } else {
-                        p(0);
-                        k--;
-                    }
-                }
-            }
+    vector<int> adj[n + 1];
+    loop(i, 1, n + 1) {
+        int val;
+        read(val);
+        if(i != val) {
+            adj[i].pb(val);
         }
-
     }
-
+    loop(i, 1, n + 1) {
+        debug(adj[i]);
+    }
+    loop(i, 1, n + 1) {
+        vector<bool> v(n + 1, 0);
+        if(adj[i].size() == 0) {
+            p_s(i);
+        } else {
+            dfs(i, adj, v);
+        }
+    }
     return 0;
 }

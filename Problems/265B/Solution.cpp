@@ -10,6 +10,7 @@ using namespace __gnu_pbds;
 template <typename T> 
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
 typedef long long ll;
+typedef long long int lli;
 typedef unsigned long long ull;
 typedef long double lld;
 typedef pair<int,int> pii;
@@ -19,15 +20,10 @@ typedef pair<int,int> pii;
 #define debug(x)
 #endif
 #define p(x) cout << x;
-#define p_e(x) cout << x << endl;
-#define p_s(x) cout << x << " ";
-#define p_t_s(x, y) cout << x << " " << y;
-#define p_t_s_e(x, y) cout << x << " " << y << endl;
-
-//fstream myfile("c:\\tmp\\in.txt", ios_base::in);
-//myfile >> n;
-//fstream mf("c:\\tmp\\out.txt", ios_base::out);
-//mf << n;
+#define pe(x) cout << x << endl;
+#define ps(x) cout << x << " ";
+#define pts(x, y) cout << x << " " << y;
+#define ptse(x, y) cout << x << " " << y << endl;
 
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
@@ -52,29 +48,28 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 #define loop(i, s, e) for(i=s;i<e;i++)
 #define loopr(i, s, e) for(i=e;i>=s;i--)
 #define read(a) cin >> a
-#define read_2(a,b) cin >> a >> b;
+#define read3(a,b,c) cin >> a >> b >> c;
+#define read2(a,b) cin >> a >> b;
 #define read_array(a, n) loop(n) {cin >> a[i];}
-#define read_vector_l(v, n) loop(n) { ll val; cin >> val; v.pb(val);};
-#define read_vector_i(v, n) loop(n) { int val; cin >> val; v.pb(val);};
+#define read_vector_l(v, n) loop(i, 0, n) { ll val; cin >> val; v.pb(val);};
+#define read_vector_i(v, n) loop(i, 0, n) { int val; cin >> val; v.pb(val);};
 #define read_arrays(a, n, s) loops(n, s) {cin >> a[i];}
 #define p_m(m, r, c) loopi(r) { loopj(c) {p(m[i][j]); p(" ");} p_e("");}
 #define p_a(m, n) loopi(n)  {p(m[i]); p(" ");}
 #define map_insert(m, a, b) m.insert({a,b})
 #define map_erase(m, a) m.erase(a)
+#define stricklyLess(values, key) upper_bound(values.begin(), values.end(), key, greater<int>()); 
 #define loopm(map) for(auto it = map.begin(); it != map.end();it++)
 #define MOD 1000000007
 #define INF 1e18
 #define mp make_pair
 #define pb push_back
-const int MAXIN = 2e6;
-ll n,m,q,t,k, x, y ;
-int i;
-string s1;
-int dp[MAXIN];
-int ans;
-int v[MAXIN];
-int p[MAXIN];
+#define g_p(tc, t, ans) cout << "Case #" << (tc-t) << ": " << ans << endl;
+#define g_p_s(t, ans) cout << "Case #" << t << ": " << ans << endl;
 
+
+ll n , t,x,y, maxn, k, m, tc,d, v,l , r;
+int i,j;
 int main() {
 
     #ifdef LOCAL_JUDGE
@@ -82,34 +77,26 @@ int main() {
     #endif
     fastio();
     read(n);
-    read(k);
-    read(s1);
-    if(k == 0) {
-        p(s1);
-    }   else {
-        if(n == 1) {
-            p(0);
-        } else {
-            p(1);
-            if(s1[0] != '1') {            
-                k--;
-            } 
-            loop(i, 1, n) {
-                if(s1[i] == '0') {
-                    p(s1[i]);
-                    continue;
-                } else {
-                    if(k == 0) {
-                        p(s1[i]);
-                    } else {
-                        p(0);
-                        k--;
-                    }
-                }
+    ll sum = 0;
+    int prev = 0;
+    int val;
+    loop(i, 0, n) {
+         read(val);
+         if(i == 0) {
+            sum += val;
+         } else {
+            if(prev == val) {
+            } else if(prev > val) {
+                sum += (prev - val);
+            } else {
+                sum += (val - prev);
             }
-        }
-
+            sum++;
+         }
+         sum++;
+         prev = val;
     }
 
-    return 0;
+    p(sum);
+    return 0;   
 }

@@ -6,7 +6,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
- 
+
 template <typename T> 
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
 typedef long long ll;
@@ -24,12 +24,12 @@ typedef pair<int,int> pii;
 #define p_s(x) cout << x << " ";
 #define p_t_s(x, y) cout << x << " " << y;
 #define p_t_s_e(x, y) cout << x << " " << y << endl;
- 
+
 //fstream myfile("c:\\tmp\\in.txt", ios_base::in);
 //myfile >> n;
 //fstream mf("c:\\tmp\\out.txt", ios_base::out);
 //mf << n;
- 
+
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -39,7 +39,7 @@ void _print(double t) {cerr << t;}
 void _print(ull t) {cerr << t;}
 #define ff first
 #define ss second
- 
+
 template <class T, class V> void _print(pair <T, V> p);
 template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
@@ -69,9 +69,9 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 #define pb push_back
 #define g_p(tc, t, ans) cout << "Case #" << (tc-t) << ": " << ans << endl;
 #define g_p_s(t, ans) cout << "Case #" << t << ": " << ans << endl;
- 
+
 int main() {
- 
+
     #ifdef LOCAL_JUDGE
     freopen("Error.txt", "w", stderr);
     #endif
@@ -79,15 +79,15 @@ int main() {
     int t;
     read(t);
     while(t--) {
- 
+
         int ans, l, r;
         read(l);
         read(r);
- 
+
         ans = r % 2 == 0 ? r % max((r / 2) + 1, l ) : r % max(((r - 1) / 2) + 1, l);
         p_e(ans);
     }    
- 
- 
+
+
     return 0;
-}   
+}

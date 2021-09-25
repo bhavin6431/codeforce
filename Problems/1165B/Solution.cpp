@@ -6,7 +6,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
- 
+
 template <typename T> 
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
 typedef long long ll;
@@ -23,12 +23,12 @@ typedef pair<int,int> pii;
 #define p_s(x) cout << x << " ";
 #define p_t_s(x, y) cout << x << " " << y;
 #define p_t_s_e(x, y) cout << x << " " << y << endl;
- 
+
 //fstream myfile("c:\\tmp\\in.txt", ios_base::in);
 //myfile >> n;
 //fstream mf("c:\\tmp\\out.txt", ios_base::out);
 //mf << n;
- 
+
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -38,7 +38,7 @@ void _print(double t) {cerr << t;}
 void _print(ull t) {cerr << t;}
 #define ff first
 #define ss second
- 
+
 template <class T, class V> void _print(pair <T, V> p);
 template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
@@ -73,29 +73,29 @@ int dp[MAXIN];
 int ans;
 int v[MAXIN];
 int p[MAXIN];
- 
+
 int main() {
- 
+
     #ifdef LOCAL_JUDGE
     freopen("Error.txt", "w", stderr);
     #endif
     fastio();
     read(n);
     vector<int> c(n);
- 
+
     loop(i, 0, n) {
       cin >> c[i];
   }
   sort(c.begin(), c.end());
   int ans = 0;
- 
+
   loop(i, 1, n + 1) {
     if(c[i - 1] >= ans + 1) {
         ans++;
     } 
 }
 p(ans);
- 
- 
+
+
 return 0;
-}         
+}
