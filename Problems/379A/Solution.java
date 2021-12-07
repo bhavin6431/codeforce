@@ -4,28 +4,42 @@ import java.io.InputStreamReader;
 
 public class Solution {
 
-	public static final int MOD = 1000050131;
-
 	public static void main(String args[]) throws IOException {
 		// BufferedReader br = new BufferedReader(new FileReader("c://tmp//in.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t[] = r_i_a(br, ":");
-		int m = r_i(br);
-		int hh = t[0];
-		int mm = t[1];
+		int in[] = r_i_a(br);
+		int s = in[0];
+		int b = in[1];
+		int ans = 0;
+		while (s > 0) {
+			s--;
+			ans++;
+			if (ans % b == 0) {
+				s++;
+			}
 
-		int dh = m / 60;
-		int dm = m < 60 ? m : m % 60;
-
-		if (mm + dm >= 60) {
-			dh++;
-			dm = mm + dm - 60;
-		} else {
-			dm += mm;
 		}
-		dh = dh % 24;
-		pr_o_nl(((hh + dh) > 23 ? String.format("%02d", (hh + dh) - 24) : String.format("%02d", (hh + dh))) + ":"
-				+ String.format("%02d", dm));
+		pr_o_nl(ans);
+	}
+
+	static class Pair implements Comparable<Pair> {
+		public Pair(Integer s, Integer b) {
+			super();
+			this.s = s;
+			this.b = b;
+		}
+
+		Integer s;
+		Integer b;
+
+		@Override
+		public int compareTo(Pair o) {
+			if (this.s.equals(o.s)) {
+				return o.b.compareTo(this.b);
+			} else {
+				return this.s.compareTo(o.s);
+			}
+		}
 
 	}
 
@@ -85,6 +99,15 @@ public class Solution {
 		int a[] = new int[s.length];
 		for (int i = 0; i < s.length; i++) {
 			a[i] = prs_s_i(s[i]);
+		}
+		return a;
+	}
+
+	public static long[] r_l_a(BufferedReader br) throws IOException {
+		String s[] = r_s_a(br);
+		long a[] = new long[s.length];
+		for (int i = 0; i < s.length; i++) {
+			a[i] = prs_s_l(s[i]);
 		}
 		return a;
 	}

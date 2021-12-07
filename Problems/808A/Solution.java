@@ -9,34 +9,21 @@ public class Solution {
 	public static void main(String args[]) throws IOException {
 		// BufferedReader br = new BufferedReader(new FileReader("c://tmp//in.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t[] = r_i_a(br, ":");
-		int m = r_i(br);
-		int hh = t[0];
-		int mm = t[1];
-
-		int dh = m / 60;
-		int dm = m < 60 ? m : m % 60;
-
-		if (mm + dm >= 60) {
-			dh++;
-			dm = mm + dm - 60;
+		String s = r_s(br);
+		if (Long.parseLong(s) < 9) {
+			pr_o_nl(Long.parseLong(s) + 1 - Long.parseLong(s));
 		} else {
-			dm += mm;
+			String ns = s.charAt(0) + gen("9", s.length() - 1);
+			pr_o_nl(Long.parseLong(ns) + 1 - Long.parseLong(s));
 		}
-		dh = dh % 24;
-		pr_o_nl(((hh + dh) > 23 ? String.format("%02d", (hh + dh) - 24) : String.format("%02d", (hh + dh))) + ":"
-				+ String.format("%02d", dm));
-
 	}
 
-	public static void print(int[][] m) {
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m[0].length; j++) {
-				pr_o(m[i][j] + " ");
-			}
-			pr_nl();
+	public static String gen(String s, long r) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < r; i++) {
+			sb.append("9");
 		}
-		pr_nl();
+		return sb.toString();
 	}
 
 	public static void pr_o(Object s) {
@@ -76,10 +63,6 @@ public class Solution {
 		return br.readLine().split(" ");
 	}
 
-	public static String[] r_s_a(BufferedReader br, String s) throws IOException {
-		return br.readLine().split(s);
-	}
-
 	public static int[] r_i_a(BufferedReader br) throws IOException {
 		String s[] = r_s_a(br);
 		int a[] = new int[s.length];
@@ -89,11 +72,11 @@ public class Solution {
 		return a;
 	}
 
-	public static int[] r_i_a(BufferedReader br, String split) throws IOException {
-		String s[] = r_s_a(br, split);
-		int a[] = new int[s.length];
+	public static long[] r_l_a(BufferedReader br) throws IOException {
+		String s[] = r_s_a(br);
+		long a[] = new long[s.length];
 		for (int i = 0; i < s.length; i++) {
-			a[i] = prs_s_i(s[i]);
+			a[i] = prs_s_l(s[i]);
 		}
 		return a;
 	}

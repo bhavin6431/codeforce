@@ -4,29 +4,36 @@ import java.io.InputStreamReader;
 
 public class Solution {
 
-	public static final int MOD = 1000050131;
-
 	public static void main(String args[]) throws IOException {
 		// BufferedReader br = new BufferedReader(new FileReader("c://tmp//in.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t[] = r_i_a(br, ":");
-		int m = r_i(br);
-		int hh = t[0];
-		int mm = t[1];
 
-		int dh = m / 60;
-		int dm = m < 60 ? m : m % 60;
-
-		if (mm + dm >= 60) {
-			dh++;
-			dm = mm + dm - 60;
-		} else {
-			dm += mm;
+		int a[] = r_i_a(br);
+		int n = a[0];
+		int k = a[1];
+		String s = r_s(br);
+		int sf = 0;
+		boolean good = true;
+		boolean start = false;
+		for (int i = 0; i < n; i++) {
+			if (s.charAt(i) == '#') {
+				if (!start) {
+					sf = 1;
+					start = true;
+				} else {
+					sf++;
+				}
+			} else {
+				sf = 0;
+				start = false;
+			}
+			if (sf > k - 1) {
+				good = false;
+				break;
+			}
 		}
-		dh = dh % 24;
-		pr_o_nl(((hh + dh) > 23 ? String.format("%02d", (hh + dh) - 24) : String.format("%02d", (hh + dh))) + ":"
-				+ String.format("%02d", dm));
 
+		pr_o_nl(good ? "YES" : "NO");
 	}
 
 	public static void print(int[][] m) {

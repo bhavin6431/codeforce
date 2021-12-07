@@ -1,32 +1,39 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Solution {
-
-	public static final int MOD = 1000050131;
 
 	public static void main(String args[]) throws IOException {
 		// BufferedReader br = new BufferedReader(new FileReader("c://tmp//in.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t[] = r_i_a(br, ":");
-		int m = r_i(br);
-		int hh = t[0];
-		int mm = t[1];
-
-		int dh = m / 60;
-		int dm = m < 60 ? m : m % 60;
-
-		if (mm + dm >= 60) {
-			dh++;
-			dm = mm + dm - 60;
-		} else {
-			dm += mm;
+		int in[] = r_i_a(br);
+		int n = in[0];
+		int l = in[1];
+		int a[] = r_i_a(br);
+		Arrays.sort(a);
+		int ans = 0;
+		for (int i = 1; i < n; i++) {
+			ans = Math.max(ans, a[i] - a[i - 1]);
 		}
-		dh = dh % 24;
-		pr_o_nl(((hh + dh) > 23 ? String.format("%02d", (hh + dh) - 24) : String.format("%02d", (hh + dh))) + ":"
-				+ String.format("%02d", dm));
 
+		double leftMax = a[0] - 0;
+		double rightMax = l - a[n - 1];
+
+		pr_o_nl(maxx(leftMax, rightMax, (double) ans / 2));
+
+	}
+
+	public static boolean exists(String s, int from, String t) {
+		for (int i = from; i < s.length(); i++) {
+			if (t.length() == 1 && t.charAt(0) == s.charAt(i)) {
+				return true;
+			} else if (s.charAt(i) == t.charAt(0)) {
+				return exists(s, i + 1, t.substring(1, t.length()));
+			}
+		}
+		return false;
 	}
 
 	public static void print(int[][] m) {
@@ -130,6 +137,14 @@ public class Solution {
 	public static Integer maxx(Integer... x) {
 		int max = 0;
 		for (Integer a : x) {
+			max = Math.max(a, max);
+		}
+		return max;
+	}
+
+	public static double maxx(double... x) {
+		double max = 0;
+		for (double a : x) {
 			max = Math.max(a, max);
 		}
 		return max;

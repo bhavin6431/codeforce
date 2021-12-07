@@ -1,32 +1,30 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solution {
-
-	public static final int MOD = 1000050131;
 
 	public static void main(String args[]) throws IOException {
 		// BufferedReader br = new BufferedReader(new FileReader("c://tmp//in.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t[] = r_i_a(br, ":");
-		int m = r_i(br);
-		int hh = t[0];
-		int mm = t[1];
-
-		int dh = m / 60;
-		int dm = m < 60 ? m : m % 60;
-
-		if (mm + dm >= 60) {
-			dh++;
-			dm = mm + dm - 60;
-		} else {
-			dm += mm;
+		int a[] = r_i_a(br);
+		int n = a[0];
+		int k = a[1];
+		int u[] = r_i_a(br);
+		Set<Integer> dist = new HashSet<Integer>();
+		int f[] = new int[101];
+		int max = 0;
+		for (int i = 0; i < n; i++) {
+			dist.add(u[i]);
+			f[u[i]]++;
+			max = Math.max(max, f[u[i]]);
 		}
-		dh = dh % 24;
-		pr_o_nl(((hh + dh) > 23 ? String.format("%02d", (hh + dh) - 24) : String.format("%02d", (hh + dh))) + ":"
-				+ String.format("%02d", dm));
 
+		int dishes = (int) Math.ceil((double) max / k);
+
+		pr_o_nl((dishes * k * dist.size() - n));
 	}
 
 	public static void print(int[][] m) {
